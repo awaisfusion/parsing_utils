@@ -1,3 +1,8 @@
 ## 0.0.1
-
-* TODO: Describe initial release.
+- Initial release 🎉
+- Added `ParsingUtil` class with safe parsing for:
+    - `String`, `int`, `double`, `bool`, `DateTime`, `List`
+    - `toValidId`, `isEmptyValue`, `isNotEmptyValue`, `isOfType`, `asType`
+- Added `String` extensions:
+    - `orEmpty()`
+    - `orNullString()`
