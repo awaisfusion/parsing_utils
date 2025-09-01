@@ -1,7 +1,10 @@
 name: parsing_util
 description: Safe parsing utility for Flutter — convert dynamic values into safe String, int, double, bool, DateTime, List, and more.
 version: 0.0.1
-homepage: https://github.com/yourusername/parsing_util
+homepage: https://github.com/awaisfusion/parsing_utils
+repository: https://github.com/awaisfusion/parsing_utils
+issue_tracker: https://github.com/awaisfusion/parsing_utils/issues
+license: MIT
 
 environment:
   sdk: ^3.8.0
