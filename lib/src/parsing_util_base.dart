@@ -2,11 +2,21 @@ import 'package:flutter/foundation.dart';
 import 'package:parsing_util/parsing_util.dart';
 
 class ParsingUtil {
-  static String toSafeString(Object? object, {String defaultValue = '', String? modelName}) {
-    return isEmptyValue(object?.orEmpty().orNullString()) ? defaultValue : object.toString();
+  static String toSafeString(
+    Object? object, {
+    String defaultValue = '',
+    String? modelName,
+  }) {
+    return isEmptyValue(object?.orEmpty().orNullString())
+        ? defaultValue
+        : object.toString();
   }
 
-  static int toSafeInt(Object? object, {int defaultValue = -1, String? modelName}) {
+  static int toSafeInt(
+    Object? object, {
+    int defaultValue = -1,
+    String? modelName,
+  }) {
     if (object == null) return defaultValue;
     if (object is int) return object;
     if (object is double) return object.toInt();
@@ -19,7 +29,11 @@ class ParsingUtil {
     return defaultValue;
   }
 
-  static double toSafeDouble(Object? object, {double defaultValue = 0.0, String? modelName}) {
+  static double toSafeDouble(
+    Object? object, {
+    double defaultValue = 0.0,
+    String? modelName,
+  }) {
     if (object == null) return defaultValue;
     if (object is double) return object;
     if (object is int) return object.toDouble();
@@ -27,7 +41,11 @@ class ParsingUtil {
     return defaultValue;
   }
 
-  static bool toSafeBoolean(Object? object, {bool defaultValue = false, String? modelName}) {
+  static bool toSafeBoolean(
+    Object? object, {
+    bool defaultValue = false,
+    String? modelName,
+  }) {
     if (object == null) return defaultValue;
     if (object is bool) return object;
     if (object is int) return object == 1;
@@ -38,12 +56,22 @@ class ParsingUtil {
     return defaultValue;
   }
 
-  static String toSafeAddress(String? address, {String defaultValue = '', String? modelName}) {
+  static String toSafeAddress(
+    String? address, {
+    String defaultValue = '',
+    String? modelName,
+  }) {
     try {
-      String decodedAddress = Uri.decodeFull(toSafeString(address, modelName: modelName));
+      String decodedAddress = Uri.decodeFull(
+        toSafeString(address, modelName: modelName),
+      );
       return decodedAddress.replaceAll('+', ' ');
     } catch (e) {
-      return toSafeString(address, defaultValue: defaultValue, modelName: modelName);
+      return toSafeString(
+        address,
+        defaultValue: defaultValue,
+        modelName: modelName,
+      );
     }
   }
 
@@ -57,19 +85,27 @@ class ParsingUtil {
         return DateTime.parse(value);
       } catch (e) {
         if (kDebugMode) {
-          debugPrint('ParsingUtil ($modelName): Error parsing DateTime "$value": $e');
+          debugPrint(
+            'ParsingUtil ($modelName): Error parsing DateTime "$value": $e',
+          );
         }
         return null;
       }
     }
 
     if (kDebugMode) {
-      debugPrint('ParsingUtil ($modelName): Could not parse "$value" (${value.runtimeType}) as DateTime');
+      debugPrint(
+        'ParsingUtil ($modelName): Could not parse "$value" (${value.runtimeType}) as DateTime',
+      );
     }
     return null;
   }
 
-  static List<T> toSafeList<T>(dynamic listData, T Function(dynamic) parser, {String? modelName}) {
+  static List<T> toSafeList<T>(
+    dynamic listData,
+    T Function(dynamic) parser, {
+    String? modelName,
+  }) {
     if (listData is List) {
       final List<T> result = [];
       for (final item in listData) {
@@ -80,7 +116,9 @@ class ParsingUtil {
           }
         } catch (e) {
           if (kDebugMode) {
-            debugPrint('ParsingUtil ($modelName): Error parsing item "$item" (${item.runtimeType}) in list: $e');
+            debugPrint(
+              'ParsingUtil ($modelName): Error parsing item "$item" (${item.runtimeType}) in list: $e',
+            );
           }
         }
       }
@@ -88,7 +126,9 @@ class ParsingUtil {
     }
 
     if (listData != null && kDebugMode) {
-      debugPrint('ParsingUtil ($modelName): Expected a List but got ${listData.runtimeType}');
+      debugPrint(
+        'ParsingUtil ($modelName): Expected a List but got ${listData.runtimeType}',
+      );
     }
     return [];
   }
@@ -106,7 +146,9 @@ class ParsingUtil {
         return parsedId;
       }
     }
-    throw ArgumentError("ParsingUtil ($modelName): Invalid ID: $id. Must be a valid and positive integer.");
+    throw ArgumentError(
+      "ParsingUtil ($modelName): Invalid ID: $id. Must be a valid and positive integer.",
+    );
   }
 
   static bool isEmptyValue(Object? object) {
