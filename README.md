@@ -23,4 +23,9 @@ Add this to your `pubspec.yaml`:
 ```dart
 dependencies:
 parsing_util: ^0.0.1
+```
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 
